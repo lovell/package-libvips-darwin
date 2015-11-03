@@ -8,6 +8,7 @@ install:
   - for path in $(pkg-config --cflags --static vips | tr ' ' '\n' | grep '^-I' | cut -c 3- | sort | uniq); do cp -R ${path}/ include; done;
   - mkdir lib
   - for path in $(pkg-config --libs --static vips | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do find ${path} -type f -name *.dylib | xargs -I {} cp {} lib; done;
+  - mkdir build
   - version=$(pkg-config --modversion vips)
   - GZIP=-9 tar cfz build/libvips-${version}-darwin-x64.tar.gz include lib
 script:
