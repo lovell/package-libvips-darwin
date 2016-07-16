@@ -47,7 +47,7 @@ printf "{\n\
   \"glib\": \"$(pkg-config --modversion glib-2.0)\",\n\
   \"gsf\": \"$(pkg-config --modversion libgsf-1)\",\n\
   \"harfbuzz\": \"$(pkg-config --modversion harfbuzz)\",\n\
-  \"jpeg\": \"$(/usr/local/opt/jpeg/bin/jpegtran -version 2>&1 | cut -d' ' -f3)\",\n\
+  \"jpeg\": \"$(grep JPEG_LIB_VERSION_ include/jpeglib.h | cut -d' ' -f4 | paste -s -d'.' -)\",\n\
   \"lcms\": \"$(pkg-config --modversion lcms2)\",\n\
   \"orc\": \"$(pkg-config --modversion orc-0.4)\",\n\
   \"pango\": \"$(pkg-config --modversion pango)\",\n\
