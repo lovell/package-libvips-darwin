@@ -8,4 +8,3 @@ script:
 addons:
   artifacts:
     s3_region: eu-west-1
-    debug: true
