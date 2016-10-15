@@ -1,9 +1,13 @@
 os: osx
 osx_image: beta-xcode6.2
+env:
+  - COLUMNS=240
 install:
   - brew update
-  - brew install --build-from-source gdk-pixbuf --disable-gio-sniffing --without-libtiff --without-gdiplus --disable-modules --with-included-loaders=png,jpeg
-  - brew install --build-from-source homebrew/science/vips --with-webp --without-fftw --without-poppler
+  - brew install gdk-pixbuf --disable-gio-sniffing --without-libtiff --without-gdiplus --disable-modules --with-included-loaders="png,jpeg"
+  - brew install homebrew/science/vips --with-webp --without-fftw --without-poppler
+  - brew info gdk-pixbuf
+  - brew info vips
 script:
   - ./package.sh
 addons:
