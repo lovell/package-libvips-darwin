@@ -35,6 +35,10 @@ for filename in *.dylib; do
 done;
 cd ..
 
+# Fix file permissions
+chmod 644 include/*.h
+chmod 644 lib/*.dylib
+
 # Generate versions.json
 printf "{\n\
   \"cairo\": \"$(pkg-config --modversion cairo)\",\n\
