@@ -4,7 +4,7 @@ env:
   - COLUMNS=240
 install:
   - brew update
-  - brew install gdk-pixbuf --disable-gio-sniffing --without-libtiff --without-gdiplus --disable-modules --with-included-loaders="png,jpeg"
+  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/gdk-pixbuf-expose-configure-flags/Formula/gdk-pixbuf.rb --without-modules --with-included-loaders="png,jpeg"
   - brew install homebrew/science/vips --with-webp --without-fftw --without-poppler
   - brew info gdk-pixbuf
   - brew info vips
