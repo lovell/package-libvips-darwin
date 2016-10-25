@@ -65,7 +65,9 @@ printf "{\n\
 }" >lib/versions.json
 
 # Generate tarball
-GZIP=-9 tar cfz libvips-$(pkg-config --modversion vips-cpp)-darwin-x64.tar.gz include lib
+TARBALL=libvips-$(pkg-config --modversion vips-cpp)-darwin-x64.tar.gz
+tar cfz "${TARBALL}" include lib
+advdef --recompress --shrink-insane "${TARBALL}"
 
 # Remove working directories
 rm -rf lib include
