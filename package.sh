@@ -22,7 +22,7 @@ rm -f lib/libvipsCC.*.dylib
 
 # Manually copy JPEG and GIF dylib files
 cp /usr/local/opt/jpeg/lib/libjpeg.8.dylib lib
-cp /usr/local/opt/giflib/lib/libgif.4.dylib lib
+cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
 # Modify all dylib file dependencies to use relative paths
 cd lib
