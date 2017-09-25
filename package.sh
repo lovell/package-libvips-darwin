@@ -62,11 +62,13 @@ printf "{\n\
   \"vips\": \"$(pkg-config --modversion vips-cpp)\",\n\
   \"webp\": \"$(pkg-config --modversion libwebp)\",\n\
   \"xml\": \"$(pkg-config --modversion libxml-2.0)\"\n\
-}" >lib/versions.json
+}" >versions.json
+
+printf "\"darwin-x64\"" >platform.json
 
 # Generate tarball
 TARBALL=libvips-$(pkg-config --modversion vips-cpp)-darwin-x64.tar.gz
-tar cfz "${TARBALL}" include lib
+tar cfz "${TARBALL}" include lib *.json
 advdef --recompress --shrink-insane "${TARBALL}"
 
 # Remove working directories
