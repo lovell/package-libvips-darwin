@@ -21,7 +21,7 @@ done;
 rm -f lib/libvipsCC.*.dylib
 
 # Manually copy JPEG and GIF dylib files
-cp /usr/local/opt/jpeg/lib/libjpeg.8.dylib lib
+cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
 # Modify all dylib file dependencies to use relative paths
@@ -72,7 +72,7 @@ tar cfz "${TARBALL}" include lib *.json
 advdef --recompress --shrink-insane "${TARBALL}"
 
 # Remove working directories
-rm -rf lib include
+rm -rf lib include *.json
 
 # Display checksum
 shasum *.tar.gz
