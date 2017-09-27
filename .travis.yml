@@ -6,8 +6,10 @@ install:
   - brew update
   - brew install advancecomp
   - brew install gdk-pixbuf --without-modules --with-included-loaders="png,jpeg"
+  - brew install harfbuzz --without-graphite2
   - brew install vips --with-webp --without-fftw --without-poppler
   - brew info gdk-pixbuf
+  - brew info harfbuzz
   - brew info vips
 script:
   - ./package.sh
