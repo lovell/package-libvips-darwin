@@ -11,7 +11,7 @@ done;
 rm include/vips/vipsc++.h
 
 # Manually copy JPEG and GIF header files
-cp /usr/local/opt/jpeg/include/*.h include
+cp /usr/local/opt/jpeg-turbo/include/*.h include
 cp /usr/local/opt/giflib/include/*.h include
 
 # Use pkg-config to automagically find and copy necessary dylib files
@@ -21,6 +21,7 @@ done;
 rm -f lib/libvipsCC.*.dylib
 
 # Manually copy JPEG and GIF dylib files
+cp /usr/local/opt/jpeg-turbo/lib/libjpeg.8.dylib lib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
