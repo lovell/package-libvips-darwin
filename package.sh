@@ -8,6 +8,7 @@ mkdir lib include
 for path in $(pkg-config --cflags --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-I' | cut -c 3- | sort | uniq); do
   cp -R ${path}/ include;
 done;
+rm include/gettext-po.h
 
 # Manually copy JPEG and GIF header files
 cp /usr/local/opt/jpeg/include/*.h include
@@ -17,6 +18,7 @@ cp /usr/local/opt/giflib/include/*.h include
 for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do
   find ${path} -type f -name *.dylib | xargs -I {} cp {} lib;
 done;
+rm -f lib/*gettext*.dylib
 
 # Manually copy JPEG and GIF dylib files
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
@@ -46,6 +48,7 @@ printf "{\n\
   \"freetype\": \"$(pkg-config --modversion freetype2)\",\n\
   \"fribidi\": \"$(pkg-config --modversion fribidi)\",\n\
   \"gdkpixbuf\": \"$(pkg-config --modversion gdk-pixbuf-2.0)\",\n\
+  \"gettext\": \"$(pkg-config --modversion gettext)\",\n\
   \"gif\": \"$(grep GIFLIB_ include/gif_lib.h | cut -d' ' -f3 | paste -s -d'.' -)\",\n\
   \"glib\": \"$(pkg-config --modversion glib-2.0)\",\n\
   \"gsf\": \"$(pkg-config --modversion libgsf-1)\",\n\
