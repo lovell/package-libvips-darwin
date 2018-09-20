@@ -10,26 +10,33 @@ for path in $(pkg-config --cflags --static vips-cpp libcroco-0.6 | tr ' ' '\n' |
 done;
 rm include/gettext-po.h
 
-# Manually copy JPEG and GIF header files
+# Manually copy header files for jpeg and giflib
 cp /usr/local/opt/jpeg/include/*.h include
 cp /usr/local/opt/giflib/include/*.h include
 
 # Use pkg-config to automagically find and copy necessary dylib files
 for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do
   if [ -d ${path} ]; then
-    find ${path} \( -type l -o -type f \) -name *.dylib | xargs -I {} cp {} lib;
+    find ${path} \( -type l -o -type f \) -name *.dylib | xargs -I {} cp -d {} lib;
   fi
 done;
 rm -f lib/*gettext*.dylib
 
-# Manually copy JPEG and GIF dylib files
+# Manually copy dylib files for jpeg and giflib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
-# Manually copy gdk-pixbuf loaders
-ls -al /usr/local/opt/gdk-pixbuf/lib
-ls -al /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0
-cp -r /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0 lib/
+echo "debug: jpeg-turbo contents"
+ls -al /usr/local/opt/jpeg-turbo/include
+ls -al /usr/local/opt/jpeg-turbo/lib
+
+# Manually copy selected gdk_pixbuf loaders and update cache
+gdk_pixbuf_loaders="lib/gdk-pixbuf-2.0/$(pkg-config --modversion gdk-pixbuf-2.0)/loaders"
+mkdir -p $gdk_pixbuf_loaders
+for format in jpeg png; do
+  cp /usr/local/opt/gdk-pixbuf/$gdk_pixbuf_loaders/libpixbufloader-$format.so $gdk_pixbuf_loaders
+done;
+GDK_PIXBUF_MODULEDIR=$gdk_pixbuf_loaders gdk-pixbuf-query-loaders > $gdk_pixbuf_loaders.cache
 
 # Modify all dylib file dependencies to use relative paths
 cd lib

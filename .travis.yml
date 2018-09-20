@@ -9,9 +9,8 @@ before_install:
   - brew upgrade
   - brew cleanup
 install:
-  - brew install advancecomp
+  - brew install advancecomp jpeg-turbo
   - brew install vips --without-fftw --without-graphicsmagick --without-poppler
-  - brew info vips
 script:
   - ./package.sh
 addons:
