@@ -2,10 +2,12 @@ os: osx
 osx_image: xcode9.2
 env:
   - COLUMNS=240
-install:
+before_install:
+  - brew uninstall mercurial
   - brew uninstall python
   - brew update
   - brew upgrade
+install:
   - brew install advancecomp
   - brew install vips --without-fftw --without-graphicsmagick --without-poppler
   - brew info vips
