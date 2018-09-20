@@ -14,15 +14,11 @@ rm include/gettext-po.h
 cp /usr/local/opt/jpeg/include/*.h include
 cp /usr/local/opt/giflib/include/*.h include
 
-echo "debug"
-pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq
-ls -al /usr/local/opt
-ls -al /usr/local/opt/libpng
-ls -al /usr/local/opt/libpng/lib
-
 # Use pkg-config to automagically find and copy necessary dylib files
 for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do
-  find ${path} -type f -name *.dylib | xargs -I {} cp {} lib;
+  if [ -d ${path} ]; then
+    find ${path} -type f -name *.dylib | xargs -I {} cp {} lib;
+  fi
 done;
 rm -f lib/*gettext*.dylib
 
