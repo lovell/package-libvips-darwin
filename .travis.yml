@@ -4,6 +4,7 @@ env:
   - COLUMNS=240
 before_install:
   - brew uninstall --force mercurial
+  - brew uninstall gdal
   - brew uninstall python
   - brew update
   - brew upgrade
