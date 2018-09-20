@@ -26,12 +26,8 @@ rm -f lib/*gettext*.dylib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
-echo "debug: jpeg-turbo contents"
-ls -al /usr/local/opt/jpeg-turbo/include
-ls -al /usr/local/opt/jpeg-turbo/lib
-
 # Manually copy selected gdk_pixbuf loaders and update cache
-gdk_pixbuf_loaders="lib/gdk-pixbuf-2.0/$(pkg-config --modversion gdk-pixbuf-2.0)/loaders"
+gdk_pixbuf_loaders="lib/gdk-pixbuf-2.0/2.10.0/loaders"
 mkdir -p $gdk_pixbuf_loaders
 for format in jpeg png; do
   cp /usr/local/opt/gdk-pixbuf/$gdk_pixbuf_loaders/libpixbufloader-$format.so $gdk_pixbuf_loaders
