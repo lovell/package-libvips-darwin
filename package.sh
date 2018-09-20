@@ -26,6 +26,11 @@ rm -f lib/*gettext*.dylib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
+# Manually copy gdk-pixbuf loaders
+ls -al /usr/local/opt/gdk-pixbuf/lib
+ls -al /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0
+cp -r /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0 lib/
+
 # Modify all dylib file dependencies to use relative paths
 cd lib
 for filename in *.dylib; do
