@@ -17,7 +17,7 @@ cp /usr/local/opt/giflib/include/*.h include
 # Use pkg-config to automagically find and copy necessary dylib files
 for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do
   if [ -d ${path} ]; then
-    find ${path} -type f -name *.dylib | xargs -I {} cp {} lib;
+    find ${path} \( -type l -o -type f \) -name *.dylib | xargs -I {} cp {} lib;
   fi
 done;
 rm -f lib/*gettext*.dylib
