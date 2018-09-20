@@ -3,7 +3,7 @@ osx_image: xcode9.2
 env:
   - COLUMNS=240
 before_install:
-  - brew uninstall mercurial
+  - brew uninstall --force mercurial
   - brew uninstall python
   - brew update
   - brew upgrade
