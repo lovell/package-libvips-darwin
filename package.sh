@@ -48,7 +48,6 @@ printf "{\n\
   \"freetype\": \"$(pkg-config --modversion freetype2)\",\n\
   \"fribidi\": \"$(pkg-config --modversion fribidi)\",\n\
   \"gdkpixbuf\": \"$(pkg-config --modversion gdk-pixbuf-2.0)\",\n\
-  \"gettext\": \"$(pkg-config --modversion gettext)\",\n\
   \"gif\": \"$(grep GIFLIB_ include/gif_lib.h | cut -d' ' -f3 | paste -s -d'.' -)\",\n\
   \"glib\": \"$(pkg-config --modversion glib-2.0)\",\n\
   \"gsf\": \"$(pkg-config --modversion libgsf-1)\",\n\
