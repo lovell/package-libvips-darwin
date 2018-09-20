@@ -1,9 +1,10 @@
 os: osx
-osx_image: xcode9.3
+osx_image: xcode9.2
 env:
   - COLUMNS=240
 install:
   - brew update
+  - brew upgrade
   - brew install advancecomp
   - brew install vips --without-fftw --without-graphicsmagick --without-poppler
   - brew info vips
