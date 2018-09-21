@@ -26,14 +26,6 @@ rm -f lib/*gettext*.dylib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
-# Manually copy selected gdk_pixbuf format loaders and generate loaders.cache
-ls -al /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0/2.10.0/loaders
-for format in jpeg png svg; do
-  cp /usr/local/opt/gdk-pixbuf/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-$format.so lib/
-done;
-GDK_PIXBUF_MODULEDIR="./lib" gdk-pixbuf-query-loaders >lib/loaders.cache
-cat lib/loaders.cache
-
 # Modify all dylib file dependencies to use relative paths
 cd lib
 for filename in *.dylib; do

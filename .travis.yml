@@ -4,12 +4,13 @@ env:
   - COLUMNS=240
 before_install:
   - brew cleanup
-  - brew uninstall gdal mercurial postgis python
+  - brew uninstall boost cgal gdal go mercurial postgis postgresql python sfcgal
   - brew update
   - brew upgrade
   - brew cleanup
 install:
   - brew install advancecomp
+  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/gdk-pixbuf-builtin-loaders/Formula/gdk-pixbuf.rb --builtin-loaders="png,jpeg"
   - brew install vips --without-fftw --without-graphicsmagick --without-poppler
 script:
   - ./package.sh
