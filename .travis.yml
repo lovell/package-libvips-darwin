@@ -10,7 +10,7 @@ before_install:
   - brew cleanup
 install:
   - brew install advancecomp
-  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/vips-new-github-org/Formula/vips.rb --without-fftw --without-graphicsmagick --without-poppler
+  - brew install vips --without-fftw --without-graphicsmagick --without-poppler
 script:
   - ./package.sh
 addons:
