@@ -6,7 +6,7 @@ env:
     - HOMEBREW_OPTFLAGS="-march=corei7"
 before_install:
   - brew cleanup
-  - brew uninstall boost cgal gdal go mercurial postgis postgresql python sfcgal
+  - brew uninstall boost cgal gdal gnupg go liblwgeom mercurial postgis postgresql python sfcgal
   - brew update
   - brew upgrade
   - brew cleanup
