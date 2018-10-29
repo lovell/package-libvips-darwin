@@ -3,7 +3,6 @@ osx_image: xcode9.2
 env:
   global:
     - COLUMNS=240
-    - HOMEBREW_OPTFLAGS="-march=corei7"
 before_install:
   - brew cleanup
   - brew uninstall boost carthage cgal dirmngr gdal go libgeotiff liblwgeom libspatialite maven mercurial postgis postgresql python sfcgal swiftlint
@@ -12,8 +11,8 @@ before_install:
   - brew cleanup
 install:
   - brew install advancecomp
-  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/gdk-pixbuf-builtin-loaders/Formula/gdk-pixbuf.rb --builtin-loaders="png,jpeg"
-  - brew install vips --without-fftw --without-graphicsmagick --without-poppler
+  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/gdk-pixbuf-builtin-loaders/Formula/gdk-pixbuf.rb --builtin-loaders="png,jpeg" --build-from-source --build-bottle
+  - brew install vips --without-fftw --without-graphicsmagick --without-poppler --build-from-source --build-bottle
 script:
   - ./package.sh
 addons:
