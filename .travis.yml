@@ -11,8 +11,8 @@ before_install:
   - brew cleanup
 install:
   - brew install advancecomp
-  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/gdk-pixbuf-builtin-loaders/Formula/gdk-pixbuf.rb --builtin-loaders="png,jpeg" --build-from-source --build-bottle
-  - brew install vips --without-fftw --without-graphicsmagick --without-poppler --build-from-source --build-bottle
+  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/sharp-libvips/Formula/gdk-pixbuf.rb --builtin-loaders="png,jpeg" --build-from-source --build-bottle
+  - brew install https://raw.githubusercontent.com/lovell/homebrew-core/sharp-libvips/Formula/vips.rb --build-from-source --build-bottle
 script:
   - ./package.sh
 addons:
