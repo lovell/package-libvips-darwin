@@ -20,14 +20,18 @@ for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | g
     find ${path} \( -type l -o -type f \) -name *.dylib | xargs -I {} cp -a {} lib;
   fi
 done;
-rm -f lib/*gettext*.dylib
 
 # Manually copy dylib files for jpeg and giflib
 cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
 cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
 
-# Modify all dylib file dependencies to use relative paths
+# Remove unused libraries
 cd lib
+rm -f *gettext* libasprintf* libcairo-gobject* libcairo-script-interpreter* \
+  libharfbuzz-gobject* libharfbuzz-icu* libharfbuzz-subset* \
+  liborc-test* libpcre16* libpcre32* libpcrecpp* libpcreposix* libtiffxx*
+
+# Modify all dylib file dependencies to use relative paths
 for filename in *.dylib; do
   chmod 644 $filename;
   install_name_tool -id @rpath/$filename $filename
