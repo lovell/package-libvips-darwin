@@ -5,7 +5,7 @@ env:
     - COLUMNS=240
 before_install:
   - brew cleanup
-  - brew uninstall boost carthage cgal dirmngr freexl gdal go libgeotiff liblwgeom libspatialite libusb maven mercurial postgis postgresql python sfcgal swiftlint
+  - brew uninstall boost carthage cgal dirmngr freexl gdal go libgeotiff liblwgeom libspatialite maven mercurial postgis postgresql python sfcgal swiftlint
   - brew update
   - brew upgrade
   - brew cleanup
