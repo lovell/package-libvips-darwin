@@ -11,6 +11,7 @@ before_install:
   - brew cleanup
 install:
   - brew install advancecomp
+  - brew install --build-from-source libffi
   - brew tap lovell/package-libvips-darwin https://github.com/lovell/package-libvips-darwin.git
   - brew install lovell/package-libvips-darwin/gdk-pixbuf --build-bottle
   - brew install lovell/package-libvips-darwin/vips --build-bottle
