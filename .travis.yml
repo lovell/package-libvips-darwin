@@ -11,11 +11,11 @@ before_install:
   - brew cleanup
 install:
   - brew install advancecomp
-  - brew reinstall --build-from-source libffi
   - brew tap lovell/package-libvips-darwin https://github.com/lovell/package-libvips-darwin.git
   - brew install lovell/package-libvips-darwin/gdk-pixbuf --build-bottle
   - brew install lovell/package-libvips-darwin/vips --build-bottle
 script:
+  - export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/local/opt/libffi/lib/pkgconfig"
   - ./package.sh
 addons:
   artifacts:
