@@ -46,7 +46,7 @@ class GdkPixbuf < Formula
       -Dnative_windows_loaders=false
       -Dinstalled_tests=false
       -Dman=false
-      -Dbuiltin_loaders="png,jpeg"
+      -Dbuiltin_loaders=png,jpeg
     ]
 
     ENV["DESTDIR"] = "/"
