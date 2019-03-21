@@ -31,6 +31,8 @@ class Vips < Formula
     args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
+      --with-jpeg-includes=#{Formula["jpeg-turbo"].opt_include}
+      --with-jpeg-libraries=#{Formula["jpeg-turbo"].opt_lib}
     ]
 
     system "./configure", *args
