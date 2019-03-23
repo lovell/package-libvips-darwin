@@ -10,36 +10,36 @@ for path in $(pkg-config --cflags --static vips-cpp libcroco-0.6 | tr ' ' '\n' |
 done;
 rm include/gettext-po.h
 
-# Manually copy header files for jpeg and giflib
-cp /usr/local/opt/jpeg/include/*.h include
-cp /usr/local/opt/giflib/include/*.h include
+# Manually copy header files for giflib
+cp $(brew --prefix giflib)/include/*.h include
 
-# Use pkg-config to automagically find and copy necessary dylib files
-for path in $(pkg-config --libs --static vips-cpp libcroco-0.6 | tr ' ' '\n' | grep '^-L' | cut -c 3- | sort | uniq); do
-  if [ -d ${path} ]; then
-    find ${path} \( -type l -o -type f \) -name *.dylib | xargs -I {} cp -a {} lib;
-  fi
-done;
+# Pack only the relevant shared libraries
+# and modify all dylib file dependencies to use relative paths
+function copydeps {
+  local file=$1
+  local dest_dir=$2
 
-# Manually copy dylib files for jpeg and giflib
-cp /usr/local/opt/jpeg/lib/libjpeg.9.dylib lib
-cp /usr/local/opt/giflib/lib/libgif.7.dylib lib
+  local base=$(basename $file)
 
-# Remove unused libraries
-cd lib
-rm -f *gettext* libasprintf* libcairo-gobject* libcairo-script-interpreter* \
-  libharfbuzz-gobject* libharfbuzz-icu* libharfbuzz-subset* \
-  liborc-test* libpcre16* libpcre32* libpcrecpp* libpcreposix* libtiffxx*
+  for dep in $(otool -LX $file | awk '{print $1}' | grep '/usr/local'); do
+    base_dep=$(basename $dep)
 
-# Modify all dylib file dependencies to use relative paths
-for filename in *.dylib; do
-  chmod 644 $filename;
-  install_name_tool -id @rpath/$filename $filename
-  for dependency in $(otool -L $filename | cut -d' ' -f1 | grep '/usr/local'); do
-    install_name_tool -change $dependency @rpath/$(basename $dependency) $filename;
+    echo "$base depends on $base_dep"
+    cp -Ln $dep $dest_dir/$base_dep
+    chmod 644 $dest_dir/$base_dep
+
+    install_name_tool -id @rpath/$base_dep $dest_dir/$base_dep
+
+    if [ $base != $base_dep ]; then
+      install_name_tool -change $dep @rpath/$base_dep $dest_dir/$base
+
+      # Call this function (recursive) on each dependency of this library
+      copydeps $dest_dir/$base_dep $dest_dir
+    fi
   done;
-done;
-cd ..
+}
+
+copydeps $(brew --prefix vips)/lib/libvips-cpp.42.dylib lib
 
 # Fix file permissions
 chmod 644 include/*.h
@@ -58,7 +58,7 @@ printf "{\n\
   \"glib\": \"$(pkg-config --modversion glib-2.0)\",\n\
   \"gsf\": \"$(pkg-config --modversion libgsf-1)\",\n\
   \"harfbuzz\": \"$(pkg-config --modversion harfbuzz)\",\n\
-  \"jpeg\": \"$(grep JPEG_LIB_VERSION_ include/jpeglib.h | cut -d' ' -f4 | paste -s -d'.' -)\",\n\
+  \"jpeg\": \"$(pkg-config --modversion libjpeg)\",\n\
   \"lcms\": \"$(pkg-config --modversion lcms2)\",\n\
   \"orc\": \"$(pkg-config --modversion orc-0.4)\",\n\
   \"pango\": \"$(pkg-config --modversion pango)\",\n\
