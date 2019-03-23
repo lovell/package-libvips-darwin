@@ -16,7 +16,7 @@ class GdkPixbuf < Formula
   depends_on "pkg-config" => :build
   depends_on "python" => :build
   depends_on "glib"
-  depends_on "jpeg"
+  depends_on "jpeg-turbo"
   depends_on "libpng"
   depends_on "libtiff"
 
@@ -49,6 +49,8 @@ class GdkPixbuf < Formula
       -Dbuiltin_loaders=png,jpeg
     ]
 
+    ENV["LIBRARY_PATH"] = Formula["jpeg-turbo"].opt_lib
+    ENV["CPATH"] = Formula["jpeg-turbo"].opt_include
     ENV["DESTDIR"] = "/"
     mkdir "build" do
       system "meson", *args, ".."
