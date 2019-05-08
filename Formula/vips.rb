@@ -16,7 +16,7 @@ class Vips < Formula
   depends_on "gettext"
   depends_on "giflib"
   depends_on "glib"
-  depends_on "jpeg"
+  depends_on "jpeg-turbo"
   depends_on "libexif"
   depends_on "libgsf"
   depends_on "libpng"
@@ -31,6 +31,8 @@ class Vips < Formula
     args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
+      --with-jpeg-includes=#{Formula["jpeg-turbo"].opt_include}
+      --with-jpeg-libraries=#{Formula["jpeg-turbo"].opt_lib}
     ]
 
     system "./configure", *args
