@@ -6,13 +6,6 @@ class Libtiff < Formula
   sha256 "2c52d11ccaf767457db0c46795d9c7d1a8d8f76f68b0b800a3dfe45786b996e4"
   revision 1
 
-  bottle do
-    cellar :any
-    sha256 "6ecdca6159e5e4db0ec0fcbddbc76dbdc65e496139b131a05f2a9ed8187914f8" => :mojave
-    sha256 "f05323c49236328f4a63e0acb9ff340baf37e589cf5699f334d1e98928f87fd4" => :high_sierra
-    sha256 "818a699c6a293cccfbae8c8b1d0320c0fd8f7ca17c711fded8764f36d11a3db6" => :sierra
-  end
-
   depends_on "jpeg-turbo"
 
   # Patches are taken from latest Fedora package, which is currently
@@ -29,6 +22,9 @@ class Libtiff < Formula
       --prefix=#{prefix}
       --disable-dependency-tracking
       --disable-lzma
+      --disable-mdi
+      --disable-pixarlog
+      --disable-cxx
       --with-jpeg-include-dir=#{Formula["jpeg-turbo"].opt_include}
       --with-jpeg-lib-dir=#{Formula["jpeg-turbo"].opt_lib}
       --without-x
