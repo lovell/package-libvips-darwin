@@ -6,6 +6,9 @@ class Libtiff < Formula
   sha256 "2c52d11ccaf767457db0c46795d9c7d1a8d8f76f68b0b800a3dfe45786b996e4"
   revision 1
 
+  # This formula is compiled from source, so there are no bottles.
+  bottle :unneeded
+
   depends_on "jpeg-turbo"
 
   # Patches are taken from latest Fedora package, which is currently
