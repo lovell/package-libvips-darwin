@@ -1,0 +1,21 @@
+name: Build
+on:
+  pull_request:
+    branches:
+    - master
+  push:
+    branches:
+    - master
+jobs:
+  build:
+    runs-on: 'macos-latest'
+    env:
+      PKG_CONFIG_PATH: "/usr/local/opt/libffi/lib/pkgconfig:/usr/local/opt/jpeg-turbo/lib/pkgconfig:$PKG_CONFIG_PATH"
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up build environment
+      run: ./setup.sh
+    - name: Build
+      run: ./package.sh
+    - name: Clean up
+      run: ./cleanup.sh
