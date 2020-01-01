@@ -66,7 +66,7 @@ printf "{\n\
   \"png\": \"$(pkg-config --modversion libpng)\",\n\
   \"svg\": \"$(pkg-config --modversion librsvg-2.0)\",\n\
   \"tiff\": \"$(pkg-config --modversion libtiff-4)\",\n\
-  \"vips\": \"$(pkg-config --modversion vips-cpp)\",\n\
+  \"vips\": \"$(pkg-config --modversion vips-cpp)-rc3\",\n\
   \"webp\": \"$(pkg-config --modversion libwebp)\",\n\
   \"xml\": \"$(pkg-config --modversion libxml-2.0)\"\n\
 }" >versions.json
@@ -74,7 +74,7 @@ printf "{\n\
 printf "\"darwin-x64\"" >platform.json
 
 # Generate tarball
-TARBALL=libvips-$(pkg-config --modversion vips-cpp)-darwin-x64.tar.gz
+TARBALL=libvips-$(pkg-config --modversion vips-cpp)-rc3-darwin-x64.tar.gz
 tar cfz "${TARBALL}" include lib *.json
 advdef --recompress --shrink-insane "${TARBALL}"
 
