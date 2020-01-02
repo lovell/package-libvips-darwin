@@ -73,13 +73,16 @@ printf "{\n\
 
 printf "\"darwin-x64\"" >platform.json
 
+# Add third-party notices
+curl -Os https://raw.githubusercontent.com/lovell/sharp-libvips/master/THIRD-PARTY-NOTICES.md
+
 # Generate tarball
 TARBALL=libvips-$(pkg-config --modversion vips-cpp)-rc3-darwin-x64.tar.gz
-tar cfz "${TARBALL}" include lib *.json
+tar cfz "${TARBALL}" include lib *.json THIRD-PARTY-NOTICES.md
 advdef --recompress --shrink-insane "${TARBALL}"
 
 # Remove working directories
-rm -rf lib include *.json
+rm -rf lib include *.json *.md
 
 # Display checksum
 shasum *.tar.gz
