@@ -66,7 +66,7 @@ printf "{\n\
   \"png\": \"$(pkg-config --modversion libpng)\",\n\
   \"svg\": \"$(pkg-config --modversion librsvg-2.0)\",\n\
   \"tiff\": \"$(pkg-config --modversion libtiff-4)\",\n\
-  \"vips\": \"$(pkg-config --modversion vips-cpp)-rc4\",\n\
+  \"vips\": \"$(pkg-config --modversion vips-cpp)\",\n\
   \"webp\": \"$(pkg-config --modversion libwebp)\",\n\
   \"xml\": \"$(pkg-config --modversion libxml-2.0)\"\n\
 }" >versions.json
@@ -77,7 +77,7 @@ printf "\"darwin-x64\"" >platform.json
 curl -Os https://raw.githubusercontent.com/lovell/sharp-libvips/master/THIRD-PARTY-NOTICES.md
 
 # Generate tarball
-TARBALL=libvips-$(pkg-config --modversion vips-cpp)-rc4-darwin-x64.tar.gz
+TARBALL=libvips-$(pkg-config --modversion vips-cpp)-darwin-x64.tar.gz
 tar cfz "${TARBALL}" include lib *.json THIRD-PARTY-NOTICES.md
 advdef --recompress --shrink-insane "${TARBALL}"
 

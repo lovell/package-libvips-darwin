@@ -1,8 +1,8 @@
 class Vips < Formula
   desc "Image processing library"
   homepage "https://github.com/libvips/libvips"
-  url "https://github.com/libvips/libvips/releases/download/v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
-  sha256 "899964dd3fb8ee7567342d7a3d15488a8e03d5fab2eefc54c9b164b6eda42e97"
+  url "https://github.com/libvips/libvips/releases/download/v8.9.0/vips-8.9.0.tar.gz"
+  sha256 "97334a5e70aff343d2587f23cb8068fc846a58cd937c89a446142ccf00ea0349"
 
   # This formula is compiled from source, so there are no bottles.
   bottle :unneeded
