@@ -1,6 +1,6 @@
 class Libtiff < Formula
   desc "TIFF library and utilities"
-  homepage "http://libtiff.maptools.org/"
+  homepage "https://libtiff.gitlab.io/libtiff/"
   url "https://download.osgeo.org/libtiff/tiff-4.1.0.tar.gz"
   mirror "https://fossies.org/linux/misc/tiff-4.1.0.tar.gz"
   sha256 "5d29f32517dadb6dbcd1255ea5bbc93a2b54b94fbf83653b4d65c7d6775b8634"
@@ -9,6 +9,9 @@ class Libtiff < Formula
   bottle :unneeded
 
   depends_on "jpeg-turbo"
+
+  # libtiff uses zlib for Deflate compression
+  uses_from_macos "zlib"
 
   def install
     args = %W[

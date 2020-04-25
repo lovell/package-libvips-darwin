@@ -14,7 +14,6 @@ before_install:
   - brew tap lovell/package-libvips-darwin https://github.com/lovell/package-libvips-darwin.git
   - KEEP_DEPENDENCIES=$(brew deps --include-build lovell/package-libvips-darwin/vips)
   - echo "$KEEP_DEPENDENCIES"
-  - brew update
   - brew cleanup
   # Remove unused formulae to speed upgrade
   - brew list -1 | grep -Ev ${KEEP_DEPENDENCIES//$'\n'/|} | xargs brew rm -f
@@ -41,5 +40,7 @@ cache:
     - $HOME/Library/Caches/Homebrew
 
 addons:
+  homebrew:
+    update: true
   artifacts:
     s3_region: eu-west-1

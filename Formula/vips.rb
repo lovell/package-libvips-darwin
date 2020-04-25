@@ -1,8 +1,8 @@
 class Vips < Formula
   desc "Image processing library"
   homepage "https://github.com/libvips/libvips"
-  url "https://github.com/libvips/libvips/releases/download/v8.9.1/vips-8.9.1.tar.gz"
-  sha256 "45633798877839005016c9d3494e98dee065f5cb9e20f4552d3b315b8e8bce91"
+  url "https://github.com/libvips/libvips/releases/download/v8.9.2/vips-8.9.2.tar.gz"
+  sha256 "ae8491b1156cd2eb9cbbaa2fd6caa1dc9ed3ded0b70443d28cd7fea798ab2a27"
 
   # This formula is compiled from source, so there are no bottles.
   bottle :unneeded
@@ -23,12 +23,16 @@ class Vips < Formula
   depends_on "pango"
   depends_on "webp"
 
+  # vips uses zlib for gzip-compressed SVG files
+  uses_from_macos "zlib"
+
   def install
+    # jpeg-turbo needs to appear before libjpeg, otherwise it's not used
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["jpeg-turbo"].opt_lib/"pkgconfig"
+
     args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
-      --with-jpeg-includes=#{Formula["jpeg-turbo"].opt_include}
-      --with-jpeg-libraries=#{Formula["jpeg-turbo"].opt_lib}
       --without-ppm
       --without-analyze
       --without-radiance
